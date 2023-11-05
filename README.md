@@ -3,43 +3,44 @@
 ## Learning Goals
 
 - Build and run a Flask application on your computer.
-- Extend a Flask application to meet the unique requirements of different projects.
+- Extend a Flask application to meet the unique requirements of different
+  projects.
 
-***
+---
 
 ## Key Vocab
 
-- **Web Framework**: software that is designed to support the development of
-  web applications. Web frameworks provide built-in tools for generating web
+- **Web Framework**: software that is designed to support the development of web
+  applications. Web frameworks provide built-in tools for generating web
   servers, turning Python objects into HTML, and more.
 - **Extension**: a package or module that adds functionality to a Flask
   application that it does not have by default.
 - **Request**: an attempt by one machine to contact another over the internet.
-- **Client**: an application or machine that accesses services being provided
-  by a server through the internet.
+- **Client**: an application or machine that accesses services being provided by
+  a server through the internet.
 - **Web Server**: a combination of software and hardware that uses Hypertext
-  Transfer Protocol (HTTP) and other protocols to respond to requests made
-  over the internet.
-- **Web Server Gateway Interface (WSGI)**: an interface between web servers
-  and applications.
-- **Template Engine**: software that takes in strings with tokenized
-  values, replacing the tokens with their values as output in a web browser.
+  Transfer Protocol (HTTP) and other protocols to respond to requests made over
+  the internet.
+- **Web Server Gateway Interface (WSGI)**: an interface between web servers and
+  applications.
+- **Template Engine**: software that takes in strings with tokenized values,
+  replacing the tokens with their values as output in a web browser.
 
-***
+---
 
 ## Introduction
 
 To get the most out of Flask, it is a good idea to connect it to a database for
 long-term storage of important data. Flask works well with SQLAlchemy and
 Alembic in their base forms as we saw in Phase 3, but we will be using libraries
-specially tailored to Flask: Flask-SQLAlchemy and Flask-Migrate. While these
-are mostly the same as SQLAlchemy and Alembic, there are a few important
-differences to note before you start developing your own applications.
+specially tailored to Flask: Flask-SQLAlchemy and Flask-Migrate. While these are
+mostly the same as SQLAlchemy and Alembic, there are a few important differences
+to note before you start developing your own applications.
 
 We will explore the integration of these libraries with Flask applications as
 well as these differences in this lesson.
 
-***
+---
 
 ## Flask Extensions
 
@@ -54,13 +55,12 @@ and are maintained by the Pallets Projects community. That being said, Flask is
 a _Python_ web framework, and you can use any Python libraries that you think
 would benefit your project.
 
-***
+---
 
 ## Managing Databases with Flask-SQLAlchemy
 
 Run `pipenv install; pipenv shell` to install Flask, Flask-SQLAlchemy, and
-Flask-Migrate in your virtual environment. Enter the following in
-`app.py`:
+Flask-Migrate in your virtual environment. Enter the following in `app.py`:
 
 ```py
 # server/app.py
@@ -75,12 +75,12 @@ if __name__ == '__main__':
 
 ```
 
-Just as with our other Flask applications, we start off with an application
-file that creates an instance of the `Flask` class with the module's name.
-We are also taking advantage of this opportunity to start configuring our
-database: in Phase 3, we would have defined this in `alembic.ini`. Since we're
-using Flask-Migrate instead of pure Alembic, we define the application
-configuration variables in the application itself.
+Just as with our other Flask applications, we start off with an application file
+that creates an instance of the `Flask` class with the module's name. We are
+also taking advantage of this opportunity to start configuring our database: in
+Phase 3, we would have defined this in `alembic.ini`. Since we're using
+Flask-Migrate instead of pure Alembic, we define the application configuration
+variables in the application itself.
 
 Now that we have a basic application ready to run, let's configure some models.
 
@@ -119,7 +119,7 @@ class Owner(db.Model):
 
 class Pet(db.Model):
     __tablename__ = 'pets'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     species = db.Column(db.String)
@@ -132,10 +132,10 @@ class Pet(db.Model):
 ```
 
 As you can see, these are very similar to the models we set up in Phase 3.
-Rather than using a `Base` as a parent object for each of our models, we use
-the `db` object's `Model` class. Inside of the models, we retrieve important
-classes and methods through the `db` object. All classes that can be imported
-from vanilla `SQLAlchemy` can be accessed through the `db` object.
+Rather than using a `Base` as a parent object for each of our models, we use the
+`db` object's `Model` class. Inside of the models, we retrieve important classes
+and methods through the `db` object. All classes that can be imported from
+vanilla `SQLAlchemy` can be accessed through the `db` object.
 
 We can manually add these data models to the database, but there aren't many
 valid reasons to do that in your work. Instead, we will generate our database
@@ -180,8 +180,8 @@ our application for use within our database configuration with
 
 We're ready to get started with our migrations. The commands for Flask-Migrate
 are identical to those in Alembic, with the exception of using `flask db` in
-place of `alembic` in commands. Run the following from the `server/` directory in
-the command line:
+place of `alembic` in commands. Run the following from the `server/` directory
+in the command line:
 
 ```console
 $ export FLASK_APP=app.py
@@ -241,27 +241,27 @@ We've created a database with Flask-SQLAlchemy and Flask-Migrate! Open
 Flask-SQLAlchemy) and you should see the fruits of your labor:
 
 ![Screenshot of SQLite database with three tables: alembic_version, owners, and
-pets](
-https://curriculum-content.s3.amazonaws.com/python/flask-sqlalchemy-owners-pets-db.png)
+pets](https://curriculum-content.s3.amazonaws.com/python/flask-sqlalchemy-owners-pets-db.png)
 
-***
+---
 
 ## Conclusion
 
 Flask extensions give us many opportunities to add functionality to our
-applications while writing minimal code for configurations. We saw how to
-create a database with Flask-SQLAlchemy and Flask-Migrate, and some among us
-may have even noticed that we wrote slightly _less_ code than we did when using
+applications while writing minimal code for configurations. We saw how to create
+a database with Flask-SQLAlchemy and Flask-Migrate, and some among us may have
+even noticed that we wrote slightly _less_ code than we did when using
 SQLAlchemy by itself!
 
 In the next lesson, we will look into working with data in Flask applications
 using Flask-SQLAlchemy.
 
-***
+---
 
 ## Solution Code
 
 ```py
+#!/usr/bin/env python3
 # server/app.py
 
 from flask import Flask
@@ -308,7 +308,7 @@ class Owner(db.Model):
 
 class Pet(db.Model):
     __tablename__ = 'pets'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     species = db.Column(db.String)
@@ -320,7 +320,7 @@ class Pet(db.Model):
 
 ```
 
-***
+---
 
 ## Resources
 
